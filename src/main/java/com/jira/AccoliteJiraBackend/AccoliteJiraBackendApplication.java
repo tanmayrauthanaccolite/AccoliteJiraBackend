@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AccoliteJiraBackendApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(AccoliteJiraBackendApplication.class, args);
 	}
 
