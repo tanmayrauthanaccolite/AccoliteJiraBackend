@@ -2,10 +2,8 @@ package com.jira.AccoliteJiraBackend.Controller;
 
 
 import com.jira.AccoliteJiraBackend.Base.Tasks;
-import com.jira.AccoliteJiraBackend.Exceptions.CurrentTaskPhaseException;
 import com.jira.AccoliteJiraBackend.Exceptions.NoSuchTaskException;
 import com.jira.AccoliteJiraBackend.Service.TaskService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +20,8 @@ public class TaskController {
     public TaskService taskService;
 
     @PostMapping("/addTasks")
-    private @NotNull ResponseEntity<Tasks> addTasks(@RequestBody Tasks t){
-        return ResponseEntity.ok().body(this.taskService.addTasks(t));
+    private Tasks addTasks(@RequestBody Tasks t){
+        return taskService.addTasks(t);
     }
 
     @GetMapping("/viewTasks")
@@ -32,7 +30,7 @@ public class TaskController {
     }
 
     @GetMapping("/{taskId}")
-    private ResponseEntity<Tasks> viewTask(@PathVariable int taskId)  {
+    private ResponseEntity<Tasks> viewTask(@PathVariable int taskId){
         try {
             return ResponseEntity.ok().body(this.taskService.viewTask(taskId));
         } catch (NoSuchTaskException e) {
@@ -40,20 +38,12 @@ public class TaskController {
         }
     }
 
-    @PutMapping("/{taskId}/sprint/{sprintId}")
-    private Tasks mapTasks(@PathVariable int taskId, @PathVariable int sprintId){
-           return taskService.mapTasks(taskId,sprintId);
+    @GetMapping("/epic/{epicId}")
+    private ResponseEntity<List<Tasks>> findAllTasksOfEpic(@PathVariable long epicId){
+          return ResponseEntity.ok().body(this.taskService.findAllTasksOfEpic(epicId));
     }
 
-    @PutMapping("/{taskId}/{taskPhase}")
-    private Tasks taskPhase(@PathVariable int taskId, @PathVariable String taskPhase) {
-        try {
-            return taskService.taskPhase(taskId,taskPhase);
-        } catch (CurrentTaskPhaseException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE);
-        }
 
-    }
 
 
 }

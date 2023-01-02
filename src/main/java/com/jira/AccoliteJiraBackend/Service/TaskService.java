@@ -1,20 +1,16 @@
 package com.jira.AccoliteJiraBackend.Service;
 
-import com.jira.AccoliteJiraBackend.Base.Sprint;
+
 import com.jira.AccoliteJiraBackend.Base.Tasks;
-import com.jira.AccoliteJiraBackend.Exceptions.CurrentTaskPhaseException;
 import com.jira.AccoliteJiraBackend.Exceptions.NoSuchTaskException;
+import com.jira.AccoliteJiraBackend.Repository.EpicRepository;
 import com.jira.AccoliteJiraBackend.Repository.SprintRepository;
 import com.jira.AccoliteJiraBackend.Repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
-
 
 @Service
 @Transactional
@@ -25,6 +21,9 @@ public class TaskService {
 
           @Autowired
           private SprintRepository sprintRepository;
+
+          @Autowired
+          private EpicRepository epicRepository;
 
           public Tasks addTasks(Tasks tsk){
 
@@ -47,29 +46,11 @@ public class TaskService {
               return this.taskrepository.findAll();
           }
 
-          public Tasks mapTasks(int taskId,int sprintId){
+          public List<Tasks> findAllTasksOfEpic(long epicId){
 
-               Set<Sprint> currentSprint = null;
-               Tasks tasks = this.taskrepository.findById(taskId).get();
-               Sprint sprint = this.sprintRepository.findById(sprintId).get();
-               currentSprint=tasks.getSprints();
-               currentSprint.add(sprint);
-               tasks.setSprints(currentSprint);
-               return this.taskrepository.save(tasks);
+                  return taskrepository.findByTaskOfEpicEpicId(epicId);
 
           }
 
 
-          public Tasks taskPhase(int taskId, String taskPhase) throws CurrentTaskPhaseException {
-
-                 Optional<Tasks> phaseObj = this.taskrepository.findById(taskId);
-                 if(phaseObj.isPresent()){
-                    Tasks t = phaseObj.get();
-                    t.setTaskPhase(taskPhase);
-                    t.setTaskPoints(t.getTaskPoints());
-                    return taskrepository.save(t);
-                 }else {
-                       throw new CurrentTaskPhaseException("Current Phase is the Selected Phase.Select a Different Phase");
-                }
-          }
 }
