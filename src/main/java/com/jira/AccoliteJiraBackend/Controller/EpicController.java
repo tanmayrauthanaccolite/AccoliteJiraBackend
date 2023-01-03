@@ -16,7 +16,7 @@ public class EpicController {
     public EpicService epicService;
 
     @PostMapping("/epic")
-    public Epic addEpic(@RequestBody Epic epic){
+    public ResponseEntity<Epic> addEpic(@RequestBody Epic epic){
         return epicService.addEpic(epic);
     }
 

@@ -32,19 +32,19 @@ public class Project {
     private long projectId;
 
     @NotNull
-    @Column(name = "projectDescription")
+    @Column(name = "projectdescription")
     private String projectDescription;
 
     @NotNull
-    @Column(name = "projectLabel")
+    @Column(name = "projectlabel")
     private String projectLabel;
 
     @NotNull
     @CreationTimestamp
     private Timestamp timestamp;
 
-    @NotNull
-    @Column(name = "isActive")
+    //@NotNull
+    @Column(name = "is_active",nullable = true)
     private boolean isActive;
 
     @OneToMany(mappedBy = "project")

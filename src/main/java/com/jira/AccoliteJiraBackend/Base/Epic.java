@@ -55,6 +55,68 @@ public class Epic {
     @JsonManagedReference
     private List<Tasks> tasks ;
 
+    public long getEpicId() {
+        return epicId;
+    }
 
+    public void setEpicId(long epicId) {
+        this.epicId = epicId;
+    }
+
+    public String getEpicLabel() {
+        return epicLabel;
+    }
+
+    public void setEpicLabel(String epicLabel) {
+        this.epicLabel = epicLabel;
+    }
+
+    public String getEpicDescription() {
+        return epicDescription;
+    }
+
+    public void setEpicDescription(String epicDescription) {
+        this.epicDescription = epicDescription;
+    }
+
+    public String getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(String assignee) {
+        this.assignee = assignee;
+    }
+
+    public long getPriority() {
+        return priority;
+    }
+
+    public void setPriority(long priority) {
+        this.priority = priority;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public List<Tasks> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Tasks> tasks) {
+        this.tasks = tasks;
+    }
 }
 

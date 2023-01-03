@@ -43,6 +43,10 @@ public class TaskController {
           return ResponseEntity.ok().body(this.taskService.findAllTasksOfEpic(epicId));
     }
 
+    @GetMapping("/view/{employeeAlias}")
+    private ResponseEntity<List<Tasks>> findAllTasksOfEmployee(@PathVariable("employeeAlias") String employeeAlias){
+        return ResponseEntity.ok().body(this.taskService.findTasksOfEmployee(employeeAlias));
+    }
 
 
 

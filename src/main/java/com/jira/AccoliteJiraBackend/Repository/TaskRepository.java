@@ -20,4 +20,10 @@ public interface TaskRepository extends JpaRepository<Tasks,Integer> {
     List<Tasks> findByTaskOfEpicEpicId(Long epicId);
 
 
+//    @Query("select t from Tasks t where t.taskAssignee=:alias")
+//    public List<Tasks> getTasksOfEmployee(@Param("alias") String alias);
+
+//    @Query("select t from Tasks t where t.taskAssignee=:alias")
+    public List<Tasks> findByTaskAssignee(String alias);
+
 }

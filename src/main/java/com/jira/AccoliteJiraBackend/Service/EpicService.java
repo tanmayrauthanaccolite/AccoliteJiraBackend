@@ -1,11 +1,14 @@
 package com.jira.AccoliteJiraBackend.Service;
 
 import com.jira.AccoliteJiraBackend.Base.Epic;
+import com.jira.AccoliteJiraBackend.Base.Project;
 import com.jira.AccoliteJiraBackend.Repository.EpicRepository;
 
+import com.jira.AccoliteJiraBackend.Repository.ProjectRepository;
 import lombok.Builder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -22,9 +25,13 @@ public class EpicService {
     @Autowired
     private EpicRepository epicRepository;
 
-    public Epic addEpic(Epic epic){
+    @Autowired
+    private ProjectRepository projectRepository;
 
-         return epicRepository.save(epic);
+    public ResponseEntity<Epic> addEpic(Epic epic){
+
+        epicRepository.save(epic);
+        return new ResponseEntity<>(epic, HttpStatus.CREATED);
     }
     public List<Epic> listEpicsOfProject(long projectId) {
 

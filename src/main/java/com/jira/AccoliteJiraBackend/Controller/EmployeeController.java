@@ -1,6 +1,7 @@
 package com.jira.AccoliteJiraBackend.Controller;
 
 import com.jira.AccoliteJiraBackend.Base.Employee;
+import com.jira.AccoliteJiraBackend.Base.Credentials;
 import com.jira.AccoliteJiraBackend.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,6 +55,14 @@ public class EmployeeController {
         }
     }
 
+
+    @PostMapping("/checkcredentials")
+    public String checkCredentials(@RequestBody Credentials credentials)
+    {
+        System.out.println(credentials.getEmail());
+        System.out.println(employeeService.checkCredentials(credentials));
+        return employeeService.checkCredentials(credentials);
+    }
 
 
 

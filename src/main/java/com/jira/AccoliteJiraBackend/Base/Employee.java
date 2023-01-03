@@ -21,7 +21,7 @@ public class Employee {
     @Id
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employeeid")
+    @Column(name = "employee_id")
     private long employeeId;
 
     @NotNull

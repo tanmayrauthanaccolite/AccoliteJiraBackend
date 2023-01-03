@@ -52,5 +52,10 @@ public class TaskService {
 
           }
 
+    public List<Tasks> findTasksOfEmployee(String alias){
+
+        return taskrepository.findByTaskAssignee(alias);
+
+    }
 
 }
