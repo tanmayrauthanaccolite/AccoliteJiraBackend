@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+
 @Service
 @Transactional
 public class EmployeeService {
@@ -22,6 +23,10 @@ public class EmployeeService {
 
         return employeeRepository.findById(employeeId).get();
     }
+    public void deleteEmployeeById(long employeeId){
+
+        employeeRepository.deleteById(employeeId);
+    }
     public List<Employee> getAllEmployeesByProjectId(long projectId){
 
         return employeeRepository.findByProjectsProjectId(projectId);
@@ -34,9 +39,6 @@ public class EmployeeService {
 
          return employeeRepository.findByAlias();
     }
-
-
-
 
 
 }

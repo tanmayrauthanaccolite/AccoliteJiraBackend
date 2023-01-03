@@ -6,13 +6,11 @@ import com.jira.AccoliteJiraBackend.Base.Sprint;
 import com.jira.AccoliteJiraBackend.Repository.JiraRepository;
 import com.jira.AccoliteJiraBackend.Repository.ProjectRepository;
 import com.jira.AccoliteJiraBackend.Repository.SprintRepository;
-import com.jira.AccoliteJiraBackend.Repository.TaskRepository;
 import com.jira.AccoliteJiraBackend.Service.SprintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -27,14 +25,12 @@ public class SprintComponent {
     private SprintRepository sprintRepository;
 
     @Autowired
-    private TaskRepository taskRepository;
-
-    @Autowired
     private ProjectRepository projectRepository;
     @Autowired
     private JiraRepository jiraRepository;
 
-    public ResponseEntity<Sprint> mapJiraSprints(int sprintId, long jiraId) {
+
+    public ResponseEntity<Sprint> mapJiraSprints(long sprintId, long jiraId) {
 
         Optional<Sprint> sprintObj = this.sprintRepository.findById(sprintId);
         Optional<Jira> jiraObj = this.jiraRepository.findById(jiraId);
@@ -54,13 +50,12 @@ public class SprintComponent {
 
     }
 
-    public ResponseEntity<Sprint> addSprintToProject(int sprintId, long projectId) {
-        Optional<Sprint> sprintObj=this.sprintRepository.findById(sprintId);
-        Optional<Project> projectObj=this.projectRepository.findById(projectId);
-        if(projectObj.isPresent() && sprintObj.isPresent())
-        {
-            Sprint sprints=sprintObj.get();
-            Project project=projectObj.get();
+    public ResponseEntity<Sprint> addSprintToProject(long sprintId, long projectId) {
+        Optional<Sprint> sprintObj = this.sprintRepository.findById(sprintId);
+        Optional<Project> projectObj = this.projectRepository.findById(projectId);
+        if (projectObj.isPresent() && sprintObj.isPresent()) {
+            Sprint sprints = sprintObj.get();
+            Project project = projectObj.get();
             sprints.setSprintOfProject(project);
             sprintRepository.save(sprints);
             return new ResponseEntity<>(sprints, HttpStatus.CREATED);
@@ -68,11 +63,16 @@ public class SprintComponent {
         return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
     }
 
-    public Sprint viewCurrentSprint(){
 
-           Long projectObj = this.projectRepository.findByProjectId();
-           return sprintRepository.findByProjectSprintId(projectObj);
+    public List<Jira> viewCurrentSprintTasks(long projectId){
+
+        long currentSprintId = this.sprintRepository.findBySprintOfProjectProjectId(projectId);
+        return this.jiraRepository.findBySprintOfJirasSprintId(currentSprintId);
 
     }
 
+
+
+
 }
+

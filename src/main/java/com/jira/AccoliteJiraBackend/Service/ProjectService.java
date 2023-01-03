@@ -4,7 +4,6 @@ import com.jira.AccoliteJiraBackend.Base.Employee;
 import com.jira.AccoliteJiraBackend.Base.Project;
 import com.jira.AccoliteJiraBackend.Repository.EmployeeRepository;
 import com.jira.AccoliteJiraBackend.Repository.ProjectRepository;
-import com.jira.AccoliteJiraBackend.Repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,16 +23,19 @@ public class ProjectService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @Autowired
-    private TaskRepository taskRepository;
-
     public void createProject(Project project)
     {
+        project.setActive(true);
         projectRepository.save(project);
     }
 
     public List<Project> viewAllProjects(){
          return projectRepository.findAll();
+    }
+
+    public List<String> getProjectDropdown(){
+
+          return projectRepository.findByProjectLabel();
     }
 
     public Project viewProjectById(long projectId){

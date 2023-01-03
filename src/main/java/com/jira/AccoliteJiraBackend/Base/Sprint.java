@@ -20,9 +20,9 @@ import java.util.*;
 public class Sprint {
 
          @Id
-         @Column(name="sprintid",unique = true)
-         @NotNull
-         private int sprintId;
+         @GeneratedValue(strategy = GenerationType.AUTO)
+         @Column(name="sprintid")
+         private long sprintId;
 
          @Column(name="projectid")
          @NotNull
@@ -54,14 +54,6 @@ public class Sprint {
          @JoinColumn(name="projectsprintid",referencedColumnName = "projectid")
          private Project sprintOfProject;
 
-         @ManyToMany(fetch = FetchType.LAZY,cascade = { CascadeType.ALL })
-         @JoinTable(
-                  name="sprint_task",
-                  joinColumns = @JoinColumn(name="sprint_id",referencedColumnName = "sprintId"),
-                  inverseJoinColumns = @JoinColumn(name="task_id",referencedColumnName = "taskId")
-         )
-         private Set<Tasks> sprinttasks = new HashSet<>();
-
 
          @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL )
          @JoinTable(
@@ -71,6 +63,8 @@ public class Sprint {
          )
          @JsonBackReference
          private List<Jira> jirasOfSprint;
+
+
 
 
 

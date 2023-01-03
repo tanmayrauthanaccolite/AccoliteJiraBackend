@@ -40,4 +40,13 @@ public class JiraController {
     private ResponseEntity<Jira> createJira(@RequestBody Jira jira){
          return new ResponseEntity<>(jiraService.createJira(jira),HttpStatus.OK);
     }
+
+    @PutMapping("/updateJira/{jiraId}")
+    private void updateJiraById(@PathVariable("jiraId") long jiraId,@RequestBody Jira jira){
+          jiraService.updateJiraById(jiraId,jira);
+    }
+    @DeleteMapping("/deletejira/{jiraId}")
+    private void deleteJiraById(@PathVariable("jiraId") long jiraId){
+         jiraService.deleteJiraById(jiraId);
+    }
 }

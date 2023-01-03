@@ -47,9 +47,6 @@ public class Project {
     @Column(name = "isActive")
     private boolean isActive;
 
-    @OneToMany(mappedBy = "project")
-    @JsonIgnore
-    private List<Epic> epics ;
 
     @OneToMany(mappedBy = "jiraprojects")
     @JsonIgnore

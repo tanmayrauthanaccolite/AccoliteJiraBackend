@@ -17,7 +17,7 @@ public class JiraService {
      private JiraRepository jiraRepository;
 
      public Jira createJira(Jira jira){
-
+         jira.setJiraStatus("To-Do");
          return jiraRepository.save(jira);
      }
 
@@ -30,6 +30,14 @@ public class JiraService {
 
          Optional<Jira> jiraObj = this.jiraRepository.findById(jiraId);
          return jiraObj.get();
+     }
+
+     public void updateJiraById(long jiraId,Jira jira){
+             jiraRepository.save(jira);
+     }
+
+     public void deleteJiraById(long jiraId){
+           jiraRepository.deleteById(jiraId);
      }
 
 

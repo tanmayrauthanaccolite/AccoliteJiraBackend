@@ -61,4 +61,6 @@ public class Jira {
          @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "jirasOfSprint")
          private List<Sprint> sprintOfJiras;
 
+
+
 }

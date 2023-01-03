@@ -1,8 +1,9 @@
 package com.jira.AccoliteJiraBackend.Controller;
 
+import com.jira.AccoliteJiraBackend.Base.Jira;
 import com.jira.AccoliteJiraBackend.Base.Sprint;
 import com.jira.AccoliteJiraBackend.BusinessLogic.SprintComponent;
-import com.jira.AccoliteJiraBackend.Exceptions.NoSuchSprintException;
+import com.jira.AccoliteJiraBackend.Exceptions.NoObjectException;
 import com.jira.AccoliteJiraBackend.Service.SprintService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,26 +34,26 @@ public class SprintController {
     }
 
     @GetMapping("/{sprintId}")
-    private ResponseEntity<Sprint> viewSprint(@PathVariable int sprintId)  {
+    private ResponseEntity<Sprint> viewSprint(@PathVariable long sprintId)  {
         try {
             return new ResponseEntity<>(sprintService.viewSprint(sprintId),HttpStatus.OK);
-        } catch (NoSuchSprintException e) {
+        } catch (NoObjectException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping("/currentsprint")
-    private ResponseEntity<Sprint> viewCurrentSprint(){
-          return new ResponseEntity<>(sprintComponent.viewCurrentSprint(),HttpStatus.OK);
+    @GetMapping("/currentsprint/{projectId}")
+    private ResponseEntity<List<Jira>> viewCurrentSprintTasks(@PathVariable("projectId") long projectId){
+          return new ResponseEntity<List<Jira>>(sprintComponent.viewCurrentSprintTasks(projectId),HttpStatus.OK);
     }
 
     @PutMapping("/{sprintId}/jiras/{jiraId}")
-    private ResponseEntity<Sprint> mapJiraSprints(@PathVariable("sprintId") int sprintId , @PathVariable("jiraId") long jiraId ){
+    private ResponseEntity<Sprint> mapJiraSprints(@PathVariable("sprintId") long sprintId , @PathVariable("jiraId") long jiraId ){
         return sprintComponent.mapJiraSprints(sprintId,jiraId);
     }
 
     @PutMapping("/{sprintId}/projects/{projectId}")
-    private ResponseEntity<Sprint> addSprintToProject(@PathVariable("sprintId") int sprintId, @PathVariable("projectId") long projectId ){
+    private ResponseEntity<Sprint> addSprintToProject(@PathVariable("sprintId") long sprintId, @PathVariable("projectId") long projectId ){
 
         try {
             return sprintComponent.addSprintToProject(sprintId,projectId);
