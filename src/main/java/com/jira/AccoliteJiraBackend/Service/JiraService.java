@@ -23,6 +23,7 @@ public class JiraService {
      public Jira createJira(Jira jira){
          jira.setJiraStatus("To-Do");
          jira.setJiraprojects(projectRepository.findByProjectId(jira.getJiraprojects().getProjectId()));
+         jira.setJiraepic(jiraRepository.findByJiraId(jira.getJiraepic().getJiraId()));
          return jiraRepository.save(jira);
      }
 

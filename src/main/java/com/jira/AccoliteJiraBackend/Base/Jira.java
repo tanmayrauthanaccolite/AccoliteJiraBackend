@@ -57,11 +57,11 @@ public class Jira {
 
 
          @ManyToOne
-         @JsonIgnore
-         @JoinColumn(name="epictasksid")
-         private Jira jiraEpic;
+         @JoinColumn(name="epictasksid", referencedColumnName = "jiraid")
+         private Jira jiraepic;
 
-         @OneToMany(mappedBy = "jiraEpic",fetch = FetchType.EAGER)
+         @OneToMany(mappedBy = "jiraepic",fetch = FetchType.EAGER)
+         @JsonIgnore
          private List<Jira> JiraTasks;
 
          @ManyToOne
