@@ -36,6 +36,32 @@ public class JiraController {
         return new ResponseEntity<>(jiraService.viewJiraById(jiraId),HttpStatus.OK);
     }
 
+    @GetMapping("/getEpics/{projectId}")
+    private ResponseEntity<List<Jira>> viewAllEpicsOfProject(@PathVariable("projectId") long projectId){
+         return new ResponseEntity<>(jiraComponent.viewAllEpicsOfProject(projectId),HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllTasks")
+    private ResponseEntity<List<Jira>> viewAllTasks(){
+        return new ResponseEntity<>(jiraComponent.viewAllTasks(),HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllEpics")
+    private ResponseEntity<List<Jira>> viewAllEpics(){
+        return new ResponseEntity<>(jiraComponent.viewAllEpics(),HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllJirasOfEmployee/{jiraAssignee}")
+    public ResponseEntity<List<Jira>> viewAllJirasByEmployee(@PathVariable("jiraAssignee") String jiraAssignee){
+          return new ResponseEntity<>(jiraComponent.viewAllJirasByEmployee(jiraAssignee),HttpStatus.OK);
+    }
+
+    @GetMapping("/getAllEpicsOfEmployee/{jiraAssignee}")
+    public ResponseEntity<List<Jira>> viewAllEpicsByEmployee(@PathVariable("jiraAssignee") String jiraAssignee){
+        return new ResponseEntity<>(jiraComponent.viewAllEpicsByEmployee(jiraAssignee),HttpStatus.OK);
+    }
+
+
     @PostMapping("/addjira")
     private ResponseEntity<Jira> createJira(@RequestBody Jira jira){
          return new ResponseEntity<>(jiraService.createJira(jira),HttpStatus.OK);

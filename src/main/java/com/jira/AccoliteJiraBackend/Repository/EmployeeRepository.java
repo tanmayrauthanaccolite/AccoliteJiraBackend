@@ -14,4 +14,7 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long> {
       @Query(value = "SELECT alias FROM Employee",nativeQuery = true)
       List<String> findByAlias();
 
+      @Query("select e from Employee e where e.email=:email")
+      Employee getEmployeeByEmail(@Param("email") String email);
+
 }

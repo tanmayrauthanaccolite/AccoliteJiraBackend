@@ -2,6 +2,7 @@ package com.jira.AccoliteJiraBackend.Base;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.sun.istack.NotNull;
 import lombok.Getter;
@@ -54,8 +55,17 @@ public class Jira {
          @NotNull
          private String jiraSprint;
 
+
          @ManyToOne
-         @JoinColumn(name="jiraproject_id",referencedColumnName = "projectid")
+         @JsonIgnore
+         @JoinColumn(name="epictasksid")
+         private Jira jiraEpic;
+
+         @OneToMany(mappedBy = "jiraEpic",fetch = FetchType.EAGER)
+         private List<Jira> JiraTasks;
+
+         @ManyToOne
+         @JoinColumn(name="jiraproject_id", referencedColumnName = "projectid")
          private Project jiraprojects;
 
          @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "jirasOfSprint")

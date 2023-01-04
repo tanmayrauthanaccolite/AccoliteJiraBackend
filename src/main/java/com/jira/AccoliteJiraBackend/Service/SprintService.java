@@ -3,6 +3,7 @@ package com.jira.AccoliteJiraBackend.Service;
 
 import com.jira.AccoliteJiraBackend.Base.Sprint;
 import com.jira.AccoliteJiraBackend.Exceptions.NoObjectException;
+import com.jira.AccoliteJiraBackend.Repository.ProjectRepository;
 import com.jira.AccoliteJiraBackend.Repository.SprintRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,9 +18,12 @@ public class SprintService {
 
     @Autowired
     private SprintRepository sprintRepository;
+    @Autowired
+    private ProjectRepository projectRepository;
 
     public Sprint addSprints(Sprint st) {
         st.setCurrent(true);
+        st.setSprintOfProject(projectRepository.findByProjectId(st.getSprintOfProject().getProjectId()));
         return sprintRepository.save(st);
     }
 

@@ -19,6 +19,7 @@ public final class PathConstants {
     public static final String addJiraPath ="/jira/addjira";
     public static final String updateJiraPath ="/jira/updateJira/{jiraId}";
     public static final String deleteJiraPath ="/jira/deletejira/{jiraId}";
+    public static final String allEpicsPath ="/jira/getTasks/{projectId}";
 
     public static final String viewAllProjectPath ="/projects/viewProject";
     public static final String viewProjectByIdPath ="/projects/viewProjectbyId/{projectId}";
@@ -33,4 +34,6 @@ public final class PathConstants {
     public static final String viewCurrentSprintPath ="/sprint/currentsprint/{projectId}";
     public static final String addJiraSprintPath ="/sprint/{sprintId}/jiras/{jiraId}";
     public static final String addSprintProjectPath ="/sprint/{sprintId}/projects/{projectId}";
+
+
 }

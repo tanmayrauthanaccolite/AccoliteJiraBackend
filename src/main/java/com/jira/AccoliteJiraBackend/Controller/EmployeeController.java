@@ -1,6 +1,8 @@
 package com.jira.AccoliteJiraBackend.Controller;
 
+import com.jira.AccoliteJiraBackend.Base.Credentials;
 import com.jira.AccoliteJiraBackend.Base.Employee;
+import com.jira.AccoliteJiraBackend.BusinessLogic.EmployeeComponent;
 import com.jira.AccoliteJiraBackend.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,9 @@ import java.util.List;
 public class EmployeeController {
     @Autowired
     public EmployeeService employeeService;
+
+    @Autowired
+    public EmployeeComponent employeeComponent;
 
     @GetMapping("/getallemployees")
     public ResponseEntity<List<Employee>> getAllEmployees(){
@@ -57,6 +62,14 @@ public class EmployeeController {
     @DeleteMapping("/delete/{employeeId}")
     public void deleteEmployeeById(@PathVariable("employeeId") long employeeId){
            employeeService.deleteEmployeeById(employeeId);
+    }
+
+    @PostMapping("/check")
+    public String checkCredentials(@RequestBody Credentials credentials)
+    {
+//        System.out.println(credentials.getEmail());
+//        System.out.println(employeeComponent.checkCredentials(credentials));
+        return employeeComponent.checkCredentials(credentials);
     }
 
 

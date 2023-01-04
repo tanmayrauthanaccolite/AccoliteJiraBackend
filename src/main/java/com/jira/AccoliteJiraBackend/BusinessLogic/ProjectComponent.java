@@ -1,6 +1,7 @@
 package com.jira.AccoliteJiraBackend.BusinessLogic;
 
 import com.jira.AccoliteJiraBackend.Base.Employee;
+import com.jira.AccoliteJiraBackend.Base.Jira;
 import com.jira.AccoliteJiraBackend.Base.Project;
 import com.jira.AccoliteJiraBackend.Repository.EmployeeRepository;
 import com.jira.AccoliteJiraBackend.Repository.ProjectRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,4 +40,7 @@ public class ProjectComponent {
             projectRepository.save(project);
         }
     }
+
+
+
 }
