@@ -16,5 +16,7 @@ public interface JiraRepository extends JpaRepository<Jira,Long> {
 
         List<Jira> findByJiraAssigneeAndJiraType(String jiraAssignee,String jiraType);
 
-        Jira findByJiraId(long jiraId);
+//        Jira findByJiraId(long jiraId);
+
+        List<Jira> findByJiraepicJiraId(long jiraId);
 }

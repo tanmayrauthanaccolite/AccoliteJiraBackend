@@ -67,10 +67,14 @@ public class EmployeeController {
     @PostMapping("/check")
     public String checkCredentials(@RequestBody Credentials credentials)
     {
-//        System.out.println(credentials.getEmail());
-//        System.out.println(employeeComponent.checkCredentials(credentials));
         return employeeComponent.checkCredentials(credentials);
     }
+
+    @GetMapping("/getemployeeByAlias/{employeeAlias}")
+    public Employee findEmployeeByAlias(@PathVariable("employeeAlias") String employeeAlias){
+        return employeeComponent.findEmployeeByAlias(employeeAlias);
+    }
+
 
 
 

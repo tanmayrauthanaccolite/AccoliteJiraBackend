@@ -30,4 +30,9 @@ public class EmployeeComponent {
             throw new IllegalStateException("Password Incorrect");
     }
 
+    public Employee findEmployeeByAlias(String alias)
+    {
+        return employeeRepository.getEmployeeByAlias(alias);
+    }
+
 }

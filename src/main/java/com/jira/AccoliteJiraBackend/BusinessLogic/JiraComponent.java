@@ -2,6 +2,7 @@ package com.jira.AccoliteJiraBackend.BusinessLogic;
 
 
 import com.jira.AccoliteJiraBackend.Base.Jira;
+import com.jira.AccoliteJiraBackend.Repository.ChecksRepository;
 import com.jira.AccoliteJiraBackend.Repository.JiraRepository;
 import com.jira.AccoliteJiraBackend.Repository.ProjectRepository;
 import com.jira.AccoliteJiraBackend.Repository.SprintRepository;
@@ -9,7 +10,9 @@ import com.jira.AccoliteJiraBackend.Service.JiraService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -30,6 +33,9 @@ public class JiraComponent {
 
     @Autowired
     private SprintRepository sprintRepository;
+
+    @Autowired
+    private ChecksRepository checksRepository;
 
 
     public long returnProjectId(String projectLabel){
@@ -57,6 +63,7 @@ public class JiraComponent {
     public List<Jira> viewAllEpicsByEmployee(String alias){
          return this.jiraRepository.findByJiraAssigneeAndJiraType(alias,"Epic");
     }
+
 
 
 

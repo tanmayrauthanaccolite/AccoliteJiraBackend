@@ -55,6 +55,9 @@ public class Jira {
          @NotNull
          private String jiraSprint;
 
+//    for the flag checks for main functionalities
+         @OneToOne(mappedBy="jirastate")
+         private Checks checks;
 
          @ManyToOne
          @JoinColumn(name="epictasksid", referencedColumnName = "jiraid")

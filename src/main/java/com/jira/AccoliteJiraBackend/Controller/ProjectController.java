@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/projects")
@@ -59,5 +60,10 @@ public class ProjectController {
     public void removeEmployeeFromProject(@PathVariable("projectId") long projectId, @PathVariable("employeeId") long employeeId){
             projectComponent.removeEmployeeFromProject(projectId,employeeId);
 
+    }
+
+    @GetMapping("/viewProjectbyAlias/{alias}")
+    public Set<Project> viewAllProjectsByEmployeeId(@PathVariable("alias") String alias){
+        return projectComponent.viewAllProjectsByAlias(alias);
     }
 }
