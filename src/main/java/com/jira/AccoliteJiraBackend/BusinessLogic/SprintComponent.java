@@ -67,7 +67,6 @@ public class SprintComponent {
     public List<Jira> viewCurrentSprintTasks(long projectId){
 
         long currentSprintId = this.sprintRepository.findBySprintOfProjectProjectId(projectId);
-        System.out.println(currentSprintId);
         //return this.jiraRepository.findTasksOfCurrentSprintOfProject("Task",String.valueOf(currentSprintId));
         return this.jiraRepository.findBySprintOfJirasSprintIdAndJiraType(currentSprintId,"Task");
 
