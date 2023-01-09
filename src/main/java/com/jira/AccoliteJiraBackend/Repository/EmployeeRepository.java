@@ -20,5 +20,6 @@ public interface EmployeeRepository extends JpaRepository<Employee,Long> {
       @Query("select e from Employee e where e.alias=:alias")
       Employee getEmployeeByAlias(@Param("alias") String alias);
 
-
+      @Query(value = "select employeeid from employee e where e.alias = :alias ",nativeQuery = true)
+      long getByAlias(@Param("alias") String alias);
 }

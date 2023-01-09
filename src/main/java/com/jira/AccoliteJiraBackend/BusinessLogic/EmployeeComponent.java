@@ -17,15 +17,15 @@ public class EmployeeComponent {
     private EmployeeRepository employeeRepository;
 
 
-    public String checkCredentials(Credentials credentials)
+    public Employee checkCredentials(Credentials credentials)
     {
         Employee employee=employeeRepository.getEmployeeByEmail(credentials.getEmail());
         if(employee==null)
         {
-            throw new IllegalStateException("Employee with that email not present ");
+            throw new IllegalStateException("Please provide correct Email. ");
         }
         if(employee.getPassword().equals(credentials.getPassword()))
-            return "Successfully Login";
+            return employee;
         else
             throw new IllegalStateException("Password Incorrect");
     }

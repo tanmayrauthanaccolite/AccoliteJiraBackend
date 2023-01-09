@@ -15,19 +15,19 @@ public class AccoliteJiraBackendApplication {
 		SpringApplication.run(AccoliteJiraBackendApplication.class, args);
 	}
 
-	@Configuration
-	public static class WebConfig
-	{
-		@Bean
-		public WebMvcConfigurer corsConfigurer()
-		{
-			return new WebMvcConfigurer() {
-				@Override
-				public void addCorsMappings(CorsRegistry registry) {
-					registry.addMapping("/**").allowedOrigins("http://localhost:4200");
-				}
-			};
-		}
-	}
+//	@Configuration
+//	public static class WebConfig
+//	{
+//		@Bean
+//		public WebMvcConfigurer corsConfigurer()
+//		{
+//			return new WebMvcConfigurer() {
+//				@Override
+//				public void addCorsMappings(CorsRegistry registry) {
+//					registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods("PUT");
+//				}
+//			};
+//		}
+//	}
 
 }

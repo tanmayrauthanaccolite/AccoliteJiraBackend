@@ -14,6 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/sprint")
 public class SprintController {
 
@@ -28,7 +29,9 @@ public class SprintController {
            return new ResponseEntity<>(sprintService.addSprints(s),HttpStatus.OK);
     }
 
-    @GetMapping("/viewSprint")
+
+
+    @GetMapping("/viewTasksOfSprint/{sprintId}")
     private ResponseEntity<List<Sprint>> viewSprints(){
         return new ResponseEntity<>(sprintService.viewSprints(),HttpStatus.OK);
     }
@@ -49,6 +52,7 @@ public class SprintController {
 
     @PutMapping("/{sprintId}/jiras/{jiraId}")
     private ResponseEntity<Sprint> mapJiraSprints(@PathVariable("sprintId") long sprintId , @PathVariable("jiraId") long jiraId ){
+        System.out.println("reaching here");
         return sprintComponent.mapJiraSprints(sprintId,jiraId);
     }
 

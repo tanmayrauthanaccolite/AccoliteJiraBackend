@@ -2,6 +2,7 @@ package com.jira.AccoliteJiraBackend.Service;
 
 import com.jira.AccoliteJiraBackend.Base.Employee;
 import com.jira.AccoliteJiraBackend.Base.Project;
+import com.jira.AccoliteJiraBackend.Base.Sprint;
 import com.jira.AccoliteJiraBackend.Repository.EmployeeRepository;
 import com.jira.AccoliteJiraBackend.Repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +43,15 @@ public class ProjectService {
 
          return projectRepository.findByProjectId(projectId);
     }
+    public Set<Sprint> getSprintDropdown(long projectId){
 
-    public ResponseEntity<Project> addEmployeeToProject(long projectId,long employeeId) {
+        Project project=projectRepository.findByProjectId(projectId);
+        return project.getSprints();
+    }
+
+
+    public ResponseEntity<Project> addEmployeeToProject(long projectId,String alias) {
+        long employeeId = this.employeeRepository.getByAlias(alias);
         Optional<Employee> employeeOptional=this.employeeRepository.findById(employeeId);
         Optional<Project> projectOptional=this.projectRepository.findById(projectId);
 

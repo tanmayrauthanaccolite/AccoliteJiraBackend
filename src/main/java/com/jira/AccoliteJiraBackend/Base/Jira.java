@@ -51,9 +51,9 @@ public class Jira {
          @NotNull
          private String jiraType;
 
-         @Column(name="jirasprint")
-         @NotNull
-         private String jiraSprint;
+//         @Column(name="jirasprint")
+//         @NotNull
+//         private long jiraSprint;
 
 //    for the flag checks for main functionalities
          @OneToOne(mappedBy="jirastate")
@@ -73,6 +73,10 @@ public class Jira {
 
          @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "jirasOfSprint")
          private List<Sprint> sprintOfJiras;
+
+    @ManyToOne
+    @JoinColumn(name = "jira_employee_id",referencedColumnName = "employeeid")
+    private Employee employee;
 
 
 

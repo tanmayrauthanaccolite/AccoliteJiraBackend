@@ -38,6 +38,10 @@ public class JiraService {
          return jiraObj.get();
      }
 
+     public List<Jira> viewTasksOfSprint(long sprintId){
+           return jiraRepository.findBySprintOfJirasSprintIdAndJiraType(sprintId,"Task");
+     }
+
      public void updateJiraById(long jiraId,Jira jira){
              jiraRepository.save(jira);
      }

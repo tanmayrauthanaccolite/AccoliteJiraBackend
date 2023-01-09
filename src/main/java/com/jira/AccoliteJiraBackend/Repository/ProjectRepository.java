@@ -15,10 +15,13 @@ public interface ProjectRepository extends JpaRepository<Project,Long> {
     Project findByProjectId(long projectId);
 
     @Query(value = "SELECT projectid FROM Project t WHERE t.projectLabel=?1 ",nativeQuery = true)
-    Long findByProjectId(String projectLabel);
+    long findByProjectId(String projectLabel);
 
     @Query(value = "SELECT projectLabel FROM Project",nativeQuery = true)
     List<String> findByProjectLabel();
 
     Set<Project> findByEmployeesAlias(String alias);
+
+//    @Query(value = "SELECT projectid FROM Project t WHERE t.projectLabel=?1 ",nativeQuery = true)
+//    long findByProjectId(String projectLabel);
 }

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.stereotype.Component;
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 
@@ -47,6 +48,10 @@ public class Employee {
     @JsonIgnore
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "employees")
     private Set<Project> projects ;
+
+    @OneToMany(mappedBy = "employee")
+    @JsonIgnore
+    private List<Jira> jiraOfEmployee;
 
 }
 

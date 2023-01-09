@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/employees")
 public class EmployeeController {
     @Autowired
@@ -65,7 +66,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/check")
-    public String checkCredentials(@RequestBody Credentials credentials)
+    public  Employee checkCredentials(@RequestBody Credentials credentials)
     {
         return employeeComponent.checkCredentials(credentials);
     }
